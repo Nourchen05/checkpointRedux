@@ -1,5 +1,4 @@
-import { ADD_TASK, DELETE_TASK, UPDATE_TASK } from "./actionsType";
-//import { taskstodo } from "..Components/ListTask/ListTask";
+import { ADD_TASK, DELETE_TASK, UPDATE_TASK, DONE_TASK } from "./actionsType";
 
 //initial state
 const initialState = {
@@ -20,18 +19,24 @@ const reducer = (state = initialState, action) => {
       };
 
     case UPDATE_TASK:
-      taskstodo = [...state];
-      let index = -1;
-      for (let i = 0; i < taskstodo.length; i++) {
-        if (taskstodo[i].id == action.payload.id) {
-          break;
-        }
-        index++;
-      }
-      if (index != -1) {
-        taskstodo[index] = action.payload;
-      }
-      return taskstodo;
+      return {
+        ...state,
+        taskstodo: state.taskstodo.map((task) =>
+          task.id === action.payload.id
+            ? { ...task, task: action.payload.task }
+            : task
+        ),
+      };
+
+    case DONE_TASK:
+      return {
+        ...state,
+        taskstodo: state.taskstodo.map((task) =>
+          task.id == action.payload.id
+            ? { ...task, isdone: !task.isdone }
+            : task
+        ),
+      };
 
     default:
       return state;

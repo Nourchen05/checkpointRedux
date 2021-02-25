@@ -1,16 +1,16 @@
 import { findByLabelText } from "@testing-library/react";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { delete_task, update_task } from "../../Redux/actions";
+import { delete_task, update_task, done_task } from "../../Redux/actions";
 import { useState } from "react";
 
 const Task = ({ tasktodo }) => {
   let dispatch = useDispatch();
   const [edittable, setedittable] = useState(false);
+  const [state, setstatus] = useState("All");
   const [task, settask] = useState("");
   return (
     <div className="row mx-2 align-items-center">
-      <p className="">{tasktodo.id[2]}</p>
       <div className="col">
         {edittable ? (
           <input
@@ -41,6 +41,12 @@ const Task = ({ tasktodo }) => {
         onClick={() => dispatch(delete_task(tasktodo.id))}
       >
         Delete
+      </button>
+      <button
+        className="btn btn-light m-2"
+        onClick={() => dispatch(done_task(tasktodo.id))}
+      >
+        {tasktodo.isdone ? "Undone" : "Done"}
       </button>
     </div>
   );
