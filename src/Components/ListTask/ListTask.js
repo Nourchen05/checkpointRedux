@@ -19,13 +19,13 @@ const ListTask = () => {
         </button>
         <button
           className="btn btn-success m-2"
-          onClick={() => setstatus("done")}
+          onClick={() => setstatus("undone")}
         >
           Done
         </button>
         <button
           className="btn btn-outline-warning m-2"
-          onClick={() => setstatus("undone")}
+          onClick={() => setstatus("done")}
         >
           Undone
         </button>

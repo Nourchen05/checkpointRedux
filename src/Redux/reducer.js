@@ -32,9 +32,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         taskstodo: state.taskstodo.map((task) =>
-          task.id == action.payload.id
-            ? { ...task, isdone: !task.isdone }
-            : task
+          task.id == action.payload ? { ...task, isdone: !task.isdone } : task
         ),
       };
 
